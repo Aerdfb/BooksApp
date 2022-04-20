@@ -7,6 +7,8 @@
     },
     books: {
       bookList: '.books-list',
+      bookImage: '.book__image',
+      bookImageID: 'data-id',
     },
   };
 
@@ -18,14 +20,8 @@
     for (const book of dataSource.books){
 
       const generatedHTML = templates.bookCard(book);
-      console.log(generatedHTML);
-
       const element = utils.createDOMFromHTML(generatedHTML);
-      console.log(element);
-
       const listOfBooks = document.querySelector(select.books.bookList);
-      console.log(listOfBooks);
-
       listOfBooks.appendChild(element);
     }
 
@@ -33,6 +29,25 @@
 
   render();
 
+  function initActions(){
+    const bookImages = document.querySelectorAll(select.books.bookImage);
+    console.log(bookImages);
+    const favoriteBooks = [];  
 
+    for(const image of bookImages){
+      console.log(image);
+      image.addEventListener('dblclick', function(event){
+        event.preventDefault;
+        image.classList.toggle('favorite');
 
+        const bookId = image.getAttribute(select.books.bookImageID);
+        favoriteBooks.push(bookId);
+
+        
+      });
+    }
+    console.log(favoriteBooks);
+
+  }
+  initActions();
 }
